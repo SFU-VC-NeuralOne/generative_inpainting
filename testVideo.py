@@ -1,8 +1,10 @@
 import cv2
+import fillAPI
 
 cap = cv2.VideoCapture('hall_objects_qcif.y4m')
 frame_list = []
 
+img_dir = 'input/hallway'
 i = 0
 # loop through all the frames and store them in a list
 while (i < 330):
@@ -14,9 +16,12 @@ while (i < 330):
     print(i)
     frame_list.append(frame)
     cv2.imshow('frame', frame)
+    img_name = img_dir + str(i) + '.png'
+    cv2.imwrite(img_name, frame)
     cv2.waitKey(10)
 
 print(frame_list[0].shape)
+fillAPI.fillVideo('examples/street_input.png', 'examples/street_mask.png', 1)
 
 
 
