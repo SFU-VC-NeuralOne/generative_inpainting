@@ -9,13 +9,13 @@ from inpaint_model import InpaintCAModel
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--image', default='', type=str,
+parser.add_argument('--image', default='examples/street_input.png', type=str,
                     help='The filename of image to be completed.')
-parser.add_argument('--mask', default='', type=str,
+parser.add_argument('--mask', default='examples/street_mask.png', type=str,
                     help='The filename of mask, value 255 indicates mask.')
 parser.add_argument('--output', default='output.png', type=str,
                     help='Where to write output.')
-parser.add_argument('--checkpoint_dir', default='', type=str,
+parser.add_argument('--checkpoint_dir', default='model_logs/snap-0', type=str,
                     help='The directory of tensorflow checkpoint.')
 
 
@@ -25,6 +25,10 @@ if __name__ == "__main__":
 
     model = InpaintCAModel()
     image = cv2.imread(args.image)
+    # image = cv2.imread('./examples/places2/canyon_input.png')
+    print(image.shape)
+    # cv2.imshow(image)
+    # cv2.waitKey(0)
     mask = cv2.imread(args.mask)
 
     assert image.shape == mask.shape
